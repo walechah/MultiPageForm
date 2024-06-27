@@ -1,24 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import "./App.css";
+import Name from "./Components/Name";
+import SecondForm from "./Components/SecondForm";
+import ShowDetails from "./Components/ShowDetails";
+import Success from "./Components/Success";
 
 function App() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [occupation, setOccupation] = useState("");
+  const [city, setCity] = useState("");
+  const [bio, setBio] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Name
+              setFirstName={setFirstName}
+              setLastName={setLastName}
+              setEmail={setEmail}
+              firstName={firstName}
+              lastName={lastName}
+              email={email}
+            />
+          }
+        />
+        <Route
+          path="/SecondForm"
+          element={
+            <SecondForm
+              setOccupation={setOccupation}
+              setCity={setCity}
+              setBio={setBio}
+              occupation={occupation}
+              city={city}
+              bio={bio}
+            />
+          }
+        />
+        <Route
+          path="/show-details"
+          element={
+            <ShowDetails
+              firstName={firstName}
+              lastName={lastName}
+              email={email}
+              occupation={occupation}
+              city={city}
+              bio={bio}
+            />
+          }
+        />
+        <Route path="/success" element={<Success />} />
+      </Routes>
+    </Router>
   );
 }
 
